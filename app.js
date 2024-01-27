@@ -14,6 +14,7 @@ const logger = function (request, response, next) {
 };
 app.use(express.json());
 app.use(morgan("dev"));
+app.use(express.static("./public"));
 app.use(logger);
 app.use((request, response, next) => {
   request.requestedAt = new Date().toISOString();

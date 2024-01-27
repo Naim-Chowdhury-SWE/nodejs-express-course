@@ -1,0 +1,9 @@
+html {
+    padding-left: 2em;
+    padding-right: 2em;
+}
+h1 {
+    font-size: large;
+    font-weight: bold;
+    text-align: center;
+}
