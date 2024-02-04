@@ -1,7 +1,5 @@
-//IMPORT PACKAGE
-
+//app.js
 const express = require("express");
-
 const morgan = require("morgan");
 
 const moviesRouter = require("./Routes/moviesRouter.js");
