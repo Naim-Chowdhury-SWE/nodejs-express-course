@@ -2,7 +2,29 @@ const Movie = require("../Models/movieModel");
 
 exports.getAllMovies = async (req, res) => {
   try {
-    const movies = await Movie.find();
+    //Mongoose 6.0 or less
+    /*  const excludeFields = ["sort", "page", "limit", "fields"];
+    const queryObject = { ...req.query };
+    excludeFields.forEach((field) => {
+      delete queryObject[field];
+    });
+    const movies = await Movie.find(queryObject); */
+    console.log(req.query);
+    let queryString = JSON.stringify(req.query);
+    queryString = queryString.replace(
+      /\b(gte|gt|lte|lt)\b/g,
+      (match) => `$${match}`
+    );
+    const queryObject = JSON.parse(queryString);
+    console.log(queryObject);
+
+    const movies = await Movie.find(queryObject);
+
+    /* const movies = await Movie.find()
+      .where("duration")
+      .equals(req.query.duration)
+      .where("ratings")
+      .equals(req.query.ratings); */
     res.status(200).json({
       status: "success",
       length: movies.length,
